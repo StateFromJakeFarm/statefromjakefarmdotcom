@@ -6,6 +6,6 @@ class BlogPostModel(models.Model):
     Store information associated with blog post
     '''
     title = models.CharField(max_length=256)
+    slug = models.SlugField(unique=True)
     pub_date = models.DateTimeField()
-    image = models.ImageField(upload_to='images/')
     body = MarkdownxField()
