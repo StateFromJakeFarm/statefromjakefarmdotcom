@@ -8,6 +8,6 @@ urlpatterns = [
     path('', views.home, name='home'),
     path('blog/edit', views.edit_post, name='new post'),
     path('blog/edit/<slug:slug>', views.edit_post, name='edit post'),
-    #path('blog/<slug:slug>', views.view_post, name='view post'),
+    path('blog/view/<slug:slug>', views.view_post, name='view post'),
     url(r'^markdownx/', include(markdownx)),
 ]

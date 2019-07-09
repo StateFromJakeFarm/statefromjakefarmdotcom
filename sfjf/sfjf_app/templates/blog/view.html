@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block styles %}
+
+<link rel="stylesheet" href="{% static 'css/blog.css' %}">
+
+{% endblock styles %}
+
+
+{% block content %}
+
+<div class="post_container">
+    <h2 class="post_title">{{ post.title }}</h2>
+    <p style="opacity: 0.5">Posted: {{ post.pub_date }}</p>
+    <p class="post_body">{{ body|safe }}</p>
+</div>
+
+{% endblock content %}
