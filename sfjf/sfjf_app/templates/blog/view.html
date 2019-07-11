@@ -12,8 +12,8 @@
 {% block content %}
 
 <div class="post_container">
-    <h2 class="post_title">{{ post.title }}</h2>
-    <p style="opacity: 0.5">Posted: {{ post.pub_date }}</p>
+    <h2 class="post_title">{{ title }}</h2>
+    <p style="opacity: 0.5">Last Updated {{ pub_date }}</p>
     <p class="post_body">{{ body|safe }}</p>
 </div>
 

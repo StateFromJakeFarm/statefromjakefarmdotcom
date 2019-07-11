@@ -7,5 +7,6 @@ class BlogPostModel(models.Model):
     '''
     title = models.CharField(max_length=256)
     slug = models.SlugField(unique=True)
+    preview = models.CharField(max_length=128)
     pub_date = models.DateTimeField()
     body = MarkdownxField()

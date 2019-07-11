@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.template.defaultfilters import slugify
 from django.utils import timezone
 from markdown import markdown
@@ -28,6 +28,7 @@ def edit_post(request, slug=''):
         else:
             # Use existing title and body for this post
             post_info['title'] = post.title
+            post_info['preview'] = post.preview
             post_info['body'] = post.body
 
     if request.method == 'POST':
@@ -36,21 +37,30 @@ def edit_post(request, slug=''):
         if post_form.is_valid():
             if post is None:
                 # Save new blog post
+                slug = slugify(post_form.cleaned_data['title'])
                 post_info = {
-                    'title': title,
+                    'title': post_form.cleaned_data['title'],
                     'slug': slug,
                     'pub_date': timezone.now(),
+                    'preview': post_form.cleaned_data['preview'],
                     'body': post_form.cleaned_data['body'],
                 }
 
                 models.BlogPostModel(**post_info).save()
             else:
-                # Update only the body and publication date for existing blog
-                # post
+                # Update only body, preview and publication date for
+                # existing post
+                post.preview = post_form.cleaned_data['preview']
                 post.body = post_form.cleaned_data['body']
                 post.pub_date = timezone.now()
 
-                post.save(update_fields=['pub_date', 'body'])
+                post.save(update_fields=['pub_date', 'preview', 'body'])
+
+                # Record slug for redirect
+                slug = post.slug
+
+            # Redirect user to gallery
+            return redirect('/blog/view/' + slug)
         else:
             raise ValueError('Submitted form is invalid')
     else:
@@ -78,8 +88,23 @@ def view_post(request, slug=''):
         raise ValueError('No post identified by slug "{}"'.format(slug))
 
     context = {
-        'post': post,
+        'title': post.title,
+        'pub_date': post.pub_date.strftime('%B %d, %Y'),
         'body': markdown(post.body),
     }
 
     return render(request, 'blog/view.html', context=context)
+
+
+def post_gallery(request):
+    '''
+    View previews of all posts (separated into pages)
+    '''
+    # Order posts from most recent to oldest
+    posts = models.BlogPostModel.objects.all().order_by('-id')
+
+    context = {
+        'posts': posts,
+    }
+
+    return render(request, 'blog/gallery.html', context=context)
