@@ -1,7 +1,10 @@
 from django.shortcuts import render, redirect
 from django.template.defaultfilters import slugify
 from django.utils import timezone
+from django.http import HttpResponse
+from django.conf import settings
 from markdown import markdown
+from os.path import join
 
 from . import forms
 from . import models
@@ -118,3 +121,12 @@ def post_gallery(request):
     }
 
     return render(request, 'blog/gallery.html', context=context)
+
+
+def resume(request, file_name='resume.pdf', my_name='Jake_Hansen'):
+    '''
+    Display resume as PDF
+    '''
+    path = join(settings.MEDIA_ROOT, file_name)
+
+    return HttpResponse(open(path, 'rb').read(), content_type='application/pdf')
