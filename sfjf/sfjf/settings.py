@@ -124,3 +124,7 @@ STATIC_URL = '/static/'
 
 # Crispy Forms bootstrap version
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+# Media directory
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'

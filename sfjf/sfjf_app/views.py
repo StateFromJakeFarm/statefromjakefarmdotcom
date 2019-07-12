@@ -77,6 +77,7 @@ def edit_post(request, slug=''):
 
     context = {
         'home_text': helpers.randomize_home_text(),
+        'nbar': 'Blog',
         'form': post_form,
     }
 
@@ -94,6 +95,7 @@ def view_post(request, slug=''):
 
     context = {
         'home_text': helpers.randomize_home_text(),
+        'nbar': 'Blog',
         'title': post.title,
         'pub_date': post.pub_date.strftime('%B %d, %Y'),
         'body': markdown(post.body),
@@ -111,6 +113,7 @@ def post_gallery(request):
 
     context = {
         'home_text': helpers.randomize_home_text(),
+        'nbar': 'Blog',
         'posts': posts,
     }
 

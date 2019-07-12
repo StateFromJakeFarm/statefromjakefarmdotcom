@@ -28,9 +28,15 @@
             <a class="navbar-brand" href="/">{{ home_text }}</a>
         </div>
         <ul class="nav navbar-nav">
-            <li><a href="#">About</a></li>
-            <li><a href="blog">Blog</a></li>
-            <li><a href="#">Projects</a></li>
+            <li class="nav-item {% if nbar == "About" %}active{% endif %}">
+                <a href="#">About</a>
+            </li>
+            <li class="nav-item {% if nbar == "Blog" %}active{% endif %}">
+                <a href="/blog">Blog</a>
+            </li>
+            <li class="nav-item {% if nbar == "Projects" %}active{% endif %}">
+                <a href="#">Projects</a>
+            </li>
         </ul>
     </div>
 </nav>

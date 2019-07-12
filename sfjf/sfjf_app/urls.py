@@ -1,5 +1,7 @@
 from django.urls import path
 from django.conf.urls import url, include
+from django.conf.urls.static import static
+from django.conf import settings
 from markdownx import urls as markdownx
 
 from . import views
@@ -11,4 +13,4 @@ urlpatterns = [
     path('blog/edit/<slug:slug>', views.edit_post, name='edit post'),
     path('blog/view/<slug:slug>', views.view_post, name='view post'),
     url(r'^markdownx/', include(markdownx)),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
