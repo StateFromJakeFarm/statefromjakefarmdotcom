@@ -11,7 +11,11 @@ def home(request):
     '''
     Render homepage
     '''
-    return render(request, 'base.html')
+    context = {
+        'home_text': helpers.randomize_home_text(),
+    }
+
+    return render(request, 'base.html', context=context)
 
 
 def edit_post(request, slug=''):
@@ -72,6 +76,7 @@ def edit_post(request, slug=''):
             post_form.fields['title'].widget.attrs['readonly'] = True
 
     context = {
+        'home_text': helpers.randomize_home_text(),
         'form': post_form,
     }
 
@@ -88,6 +93,7 @@ def view_post(request, slug=''):
         raise ValueError('No post identified by slug "{}"'.format(slug))
 
     context = {
+        'home_text': helpers.randomize_home_text(),
         'title': post.title,
         'pub_date': post.pub_date.strftime('%B %d, %Y'),
         'body': markdown(post.body),
@@ -104,6 +110,7 @@ def post_gallery(request):
     posts = models.BlogPostModel.objects.all().order_by('-id')
 
     context = {
+        'home_text': helpers.randomize_home_text(),
         'posts': posts,
     }
 

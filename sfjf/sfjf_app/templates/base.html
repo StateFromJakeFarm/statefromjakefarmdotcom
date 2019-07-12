@@ -11,9 +11,29 @@
 
     {% block styles %}
     {% endblock styles %}
+
+    <!--Begin custom scripts-->
+    <script>
+    {% block scripts %}
+    {% endblock scripts %}
+    </script>
+    <!--End custom scripts-->
 </head>
 
 <body>
+
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/">{{ home_text }}</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li><a href="#">About</a></li>
+            <li><a href="blog">Blog</a></li>
+            <li><a href="#">Projects</a></li>
+        </ul>
+    </div>
+</nav>
 
 <!--Begin custom content-->
 {% block content %}
