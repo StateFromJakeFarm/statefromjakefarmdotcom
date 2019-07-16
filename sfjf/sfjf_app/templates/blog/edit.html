@@ -5,14 +5,12 @@
 
 {% block content %}
 
-<div>
-    <h2>Edit Post</h2>
-    <form action="{{ request.path }}" method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ form|crispy }}
-        <input type="submit" value="Save">
-    </form>
-</div>
+<h2>Edit Post</h2>
+<form action="{{ request.path }}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form|crispy }}
+    <input type="submit" value="Post">
+</form>
 {{ form.media }}
 
 {% endblock content %}

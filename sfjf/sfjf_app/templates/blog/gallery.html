@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block content %}
+
+{% if request.user.is_staff %}
+<!--Only site owner can create new posts-->
+<div id="new">
+    <h4><a href="/blog/edit">New Post</a></h4>
+</div>
+{% endif %}
+
+<div id="gallery">
+    {% for p in posts %}
+        <div class="gallery_post" id="{{ p.id }}">
+            <a href="/blog/view/{{ p.slug }}"><h3>{{ p.title }}</h3></a>
+            <h5>{{ p.preview }}</h5>
+        </div>
+    {% endfor %}
+</div>
+
+{% endblock content %}

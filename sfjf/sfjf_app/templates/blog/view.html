@@ -13,6 +13,14 @@
 
 <div class="post_container">
     <h2 class="post_title">{{ title }}</h2>
+
+    {% if request.user.is_staff %}
+    <!--Only site owner can edit posts-->
+    <span>
+        <a href="/blog/edit/{{ slug }}">Edit</a>
+    </span>
+    {% endif %}
+
     <p style="opacity: 0.5">Last Updated {{ pub_date }}</p>
     <p class="post_body">{{ body|safe }}</p>
 </div>

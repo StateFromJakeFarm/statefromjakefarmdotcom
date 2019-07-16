@@ -3,6 +3,7 @@ from django.template.defaultfilters import slugify
 from django.utils import timezone
 from django.http import HttpResponse
 from django.conf import settings
+from django.contrib.auth.decorators import login_required, permission_required
 from markdown import markdown
 from os.path import join
 
@@ -21,6 +22,8 @@ def home(request):
     return render(request, 'base.html', context=context)
 
 
+@login_required
+@permission_required('user.is_staff', raise_exception=True)
 def edit_post(request, slug=''):
     '''
     Create or edit blog post
@@ -100,6 +103,7 @@ def view_post(request, slug=''):
         'home_text': helpers.randomize_home_text(),
         'nbar': 'Blog',
         'title': post.title,
+        'slug': slug,
         'pub_date': post.pub_date.strftime('%B %d, %Y'),
         'body': markdown(post.body),
     }
