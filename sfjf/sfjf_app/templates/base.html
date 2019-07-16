@@ -6,50 +6,57 @@
 <head>
     <meta charset="utf-8">
 
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <!--Bootstrap CSS-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
+    <!--Custom styles-->
     {% block styles %}
     {% endblock styles %}
-
-    <!--Begin custom scripts-->
-    <script>
-    {% block scripts %}
-    {% endblock scripts %}
-    </script>
-    <!--End custom scripts-->
 </head>
 
 <body>
 
-<nav class="navbar navbar-inverse">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="/">{{ home_text }}</a>
-        </div>
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <div class="navbar-header">
+        <a class="navbar-brand" href="/">{{ home_text }}</a>
+    </div>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="nav navbar-nav">
             <li class="nav-item {% if nbar == "About" %}active{% endif %}">
-                <a href="#">About</a>
+                <a class="nav-link" href="#">About</a>
             </li>
             <li class="nav-item">
-                <a target="_blank" rel="noopener noreferrer" href="/resume">Resume</a>
+                <a class="nav-link" target="_blank" rel="noopener noreferrer" href="/resume">Resume</a>
             </li>
             <li class="nav-item {% if nbar == "Blog" %}active{% endif %}">
-                <a href="/blog">Blog</a>
+                <a class="nav-link" href="/blog">Blog</a>
             </li>
             <li class="nav-item {% if nbar == "Projects" %}active{% endif %}">
-                <a href="#">Projects</a>
+                <a class="nav-link" href="#">Projects</a>
             </li>
         </ul>
     </div>
 </nav>
 
 <div class="container">
-<!--Begin custom content-->
+<!--Custom content-->
 {% block content %}
 {% endblock content %}
-<!--End custom content-->
 </div>
+
+<!--Custom scripts-->
+<script>
+{% block scripts %}
+{% endblock scripts %}
+</script>
+
+<!--Bootstrap scripts-->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
 </body>
 </html>

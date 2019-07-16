@@ -104,7 +104,7 @@ def view_post(request, slug=''):
         'nbar': 'Blog',
         'title': post.title,
         'slug': slug,
-        'pub_date': post.pub_date.strftime('%B %d, %Y'),
+        'pub_date': post.pub_date,
         'body': markdown(post.body),
     }
 

@@ -11,11 +11,16 @@
 </div>
 {% endif %}
 
-<div id="gallery">
+<div class="col-md-6" id="gallery">
     {% for p in posts %}
-        <div class="gallery_post" id="{{ p.id }}">
-            <a href="/blog/view/{{ p.slug }}"><h3>{{ p.title }}</h3></a>
-            <h5>{{ p.preview }}</h5>
+        <div class="card mb-4" id="post{{ p.id }}">
+            <div class="card-body">
+                <h3>
+                    <a href="/blog/view/{{ p.slug }}">{{ p.title }}</a>
+                </h3>
+                <p class="mb-1 text-muted">{{ p.pub_date|date:"M d, Y" }}</p>
+                <p class="card-text">{{ p.preview }}</p>
+            </div>
         </div>
     {% endfor %}
 </div>

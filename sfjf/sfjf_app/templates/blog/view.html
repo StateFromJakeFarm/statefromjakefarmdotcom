@@ -2,17 +2,10 @@
 
 {% load static %}
 
-{% block styles %}
-
-<link rel="stylesheet" href="{% static 'css/blog.css' %}">
-
-{% endblock styles %}
-
-
 {% block content %}
 
 <div class="post_container">
-    <h2 class="post_title">{{ title }}</h2>
+    <h1 class="post_title">{{ title }}</h1>
 
     {% if request.user.is_staff %}
     <!--Only site owner can edit posts-->
@@ -21,7 +14,7 @@
     </span>
     {% endif %}
 
-    <p style="opacity: 0.5">Last Updated {{ pub_date }}</p>
+    <p style="opacity: 0.5">Last Updated {{ pub_date|date:"M d, Y" }}</p>
     <p class="post_body">{{ body|safe }}</p>
 </div>
 
