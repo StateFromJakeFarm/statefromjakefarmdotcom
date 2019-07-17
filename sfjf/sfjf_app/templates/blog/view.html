@@ -9,9 +9,7 @@
 
     {% if request.user.is_staff %}
     <!--Only site owner can edit posts-->
-    <span>
-        <a href="/blog/edit/{{ slug }}">Edit</a>
-    </span>
+    <a class="mb-1 btn btn-info" href="/blog/edit/{{ slug }}">Edit</a>
     {% endif %}
 
     <p style="opacity: 0.5">Last Updated {{ pub_date|date:"M d, Y" }}</p>
