@@ -11,15 +11,17 @@
 </div>
 {% endif %}
 
-<div class="col-md-6" id="gallery">
+<div id="gallery">
     {% for p in posts %}
-        <div class="card mb-4" id="post{{ p.id }}">
-            <div class="card-body">
-                <h3>
-                    <a href="/blog/view/{{ p.slug }}">{{ p.title }}</a>
-                </h3>
-                <p class="mb-1 text-muted">{{ p.pub_date|date:"M d, Y" }}</p>
-                <p class="card-text">{{ p.preview }}</p>
+        <div class="card border-dark mb-4" id="post{{ p.id }}">
+            <div class="row card-body text-dark">
+                <div class="col-md-7">
+                    <h3 class="card-title">{{ p.title }}</h3>
+                    <p class="mb-1 text-muted">{{ p.pub_date|date:"M d, Y" }}</p>
+                    <p class="card-text">{{ p.preview }}</p>
+                    <a class="col-md-6 mb-3 btn btn-info" role="button" href="/blog/view/{{ p.slug }}">Continue reading</a>
+                </div>
+                <img class="col-md-5" src="{{ p.thumbnail.url }}" style="height: 200px;">
             </div>
         </div>
     {% endfor %}

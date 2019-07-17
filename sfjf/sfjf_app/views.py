@@ -56,15 +56,26 @@ def edit_post(request, slug=''):
                     'body': post_form.cleaned_data['body'],
                 }
 
+                if post_form.cleaned_data['thumbnail'] is not None:
+                    # Use default thumbnail if user uploads none
+                    post.thumbnail = post_form.cleaned_data['thumbnail']
+
                 models.BlogPostModel(**post_info).save()
             else:
                 # Update only body, preview and publication date for
                 # existing post
+                post.pub_date = timezone.now()
                 post.preview = post_form.cleaned_data['preview']
                 post.body = post_form.cleaned_data['body']
-                post.pub_date = timezone.now()
 
-                post.save(update_fields=['pub_date', 'preview', 'body'])
+                update_fields=['pub_date', 'preview', 'body']
+                if post_form.cleaned_data['thumbnail'] is not None:
+                    # Additionally, update thumbnail image if user uploads
+                    # another, otherwise keep previous thumbnail
+                    post.thumbnail = post_form.cleaned_data['thumbnail']
+                    update_fields.append('thumbnail')
+
+                post.save(update_fields=update_fields)
 
                 # Record slug for redirect
                 slug = post.slug
@@ -77,8 +88,7 @@ def edit_post(request, slug=''):
         # Display form
         post_form = forms.BlogPostForm(post_info)
         if post is not None:
-            # Don't let user modify title (because I don't want to change the
-            # post's slug right now)
+            # Title of existing post cannot be modified (because slug)
             post_form.fields['title'].widget.attrs['readonly'] = True
 
     context = {
