@@ -56,11 +56,13 @@ def edit_post(request, slug=''):
                     'body': post_form.cleaned_data['body'],
                 }
 
+                # Save post
+                post = models.BlogPostModel(**post_info)
                 if post_form.cleaned_data['thumbnail'] is not None:
                     # Use default thumbnail if user uploads none
                     post.thumbnail = post_form.cleaned_data['thumbnail']
 
-                models.BlogPostModel(**post_info).save()
+                post.save()
             else:
                 # Update only body, preview and publication date for
                 # existing post
