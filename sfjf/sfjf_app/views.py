@@ -146,3 +146,15 @@ def resume(request, file_name='resume.pdf', my_name='Jake_Hansen'):
     path = join(settings.MEDIA_ROOT, file_name)
 
     return HttpResponse(open(path, 'rb').read(), content_type='application/pdf')
+
+
+def projects(request):
+    '''
+    Give links to projects
+    '''
+    context = {
+        'home_text': helpers.randomize_home_text(),
+        'nbar': 'Projects',
+    }
+
+    return render(request, 'projects.html', context=context)
