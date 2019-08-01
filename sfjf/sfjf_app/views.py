@@ -11,12 +11,15 @@ from . import forms
 from . import models
 from . import helpers
 
-def home(request):
+def about(request):
     '''
     Render homepage
     '''
+    context = {
+        'nbar': 'About',
+    }
 
-    return render(request, 'home.html')
+    return render(request, 'about.html', context=context)
 
 
 @login_required

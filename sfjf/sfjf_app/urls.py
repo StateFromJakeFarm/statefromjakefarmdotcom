@@ -7,7 +7,7 @@ from markdownx import urls as markdownx
 from . import views
 
 urlpatterns = [
-    path('', views.home, name='home'),
+    path('', views.about, name='about'),
     path('resume', views.resume, name='resume'),
     path('blog', views.post_gallery, name='post gallery'),
     path('blog/edit', views.edit_post, name='new post'),
