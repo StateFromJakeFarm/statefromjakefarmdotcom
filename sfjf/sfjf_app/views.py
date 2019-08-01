@@ -15,11 +15,8 @@ def home(request):
     '''
     Render homepage
     '''
-    context = {
-        'home_text': helpers.randomize_home_text(),
-    }
 
-    return render(request, 'base.html', context=context)
+    return render(request, 'home.html')
 
 
 @login_required
@@ -94,7 +91,6 @@ def edit_post(request, slug=''):
             post_form.fields['title'].widget.attrs['readonly'] = True
 
     context = {
-        'home_text': helpers.randomize_home_text(),
         'nbar': 'Blog',
         'form': post_form,
     }
@@ -112,7 +108,6 @@ def view_post(request, slug=''):
         raise ValueError('No post identified by slug "{}"'.format(slug))
 
     context = {
-        'home_text': helpers.randomize_home_text(),
         'nbar': 'Blog',
         'title': post.title,
         'slug': slug,
@@ -131,7 +126,6 @@ def post_gallery(request):
     posts = models.BlogPostModel.objects.all().order_by('-id')
 
     context = {
-        'home_text': helpers.randomize_home_text(),
         'nbar': 'Blog',
         'posts': posts,
     }
@@ -153,7 +147,6 @@ def projects(request):
     Give links to projects
     '''
     context = {
-        'home_text': helpers.randomize_home_text(),
         'nbar': 'Projects',
     }
 
