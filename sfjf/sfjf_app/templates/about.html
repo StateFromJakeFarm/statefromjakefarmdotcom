@@ -4,11 +4,13 @@
 
 {% block content %}
 
-<div class="text-center">
-    <img src={% static "me.jpg" %} alt="Jake Hansen">
-    <p>
-    Hello, my name is Jake Hansen!  I'm excited about programming, linguistics, and machine learning.
-    </p>
-</div>
+<h1 class="text-center mb-3" style="font-size: 50px">Welcome!</h1>
+<p>
+    <img class="img-responsive mr-4" src={% static "me.jpg" %} alt="Jake" style="float: left;">
+    <p style="font-size: 20px">Hello, my name is Jake Hansen!  I’m a recent university graduate with deep passion for programming, machine learning, and linguistics.  My spare time is often spent building things with Python and C++, as well as torturing myself on HackerRank.</p>
+    <p style="font-size: 20px">My time in college exposed me to a number of awesome and techy communities, each of which gave me invaluable experience and friends.  I served as president of my school’s ACM chapter for two years and also worked as a year-round intern for Hewlett-Packard Enterprise.
+                               See my <a target="_blank" rel="noopener noreferrer" href="{% static "resume.pdf" %}">resume</a> for a more thorough overview of my experience.</p>
+    <p style="font-size: 20px">There isn't much more to this site, but if you want to move past this cookie-cutter landing page, the <a href="/blog">blog</a> discusses my projects and interests in detail.</p>
+</p>
 
 {% endblock content %}
