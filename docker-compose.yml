@@ -1,0 +1,23 @@
+version: '3'
+
+services:
+  nginx:
+    image: nginx:latest
+    container_name: nginx
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    ports:
+      - 80:80
+      - 443:443
+
+  personalsite:
+    build: .
+    image: personalsite
+    container_name: personalsite
+    volumes:
+      - ./sfjf:/code
+      - ./sfjf/media:/code/media
+    expose:
+      - "80"
+    restart: on-failure
+    command: bash -c "python3 manage.py makemigrations && python3 manage.py migrate && python3 manage.py runserver 0.0.0.0:80"
