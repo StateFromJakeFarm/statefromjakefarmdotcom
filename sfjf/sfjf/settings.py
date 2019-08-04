@@ -25,7 +25,7 @@ SECRET_KEY = 'mu2pv_4n^w(a7jl#w^rfkbf2^xa@mj^@+r(9#^qi^==a3%wd!_'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['personalsite']
+ALLOWED_HOSTS = ['localhost']
 
 
 # Application definition
