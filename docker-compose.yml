@@ -1,6 +1,7 @@
 version: '3'
 
 services:
+  # Reverse proxy between Django and Internet
   nginx-proxy:
     image: jwilder/nginx-proxy
     ports:
@@ -10,6 +11,8 @@ services:
       - /var/run/docker.sock:/tmp/docker.sock
       - ./nginx.conf:/etc/nginx/nginx.conf
 
+
+  # Main Django website
   personalsite:
     build: .
     image: personalsite
@@ -17,9 +20,25 @@ services:
     volumes:
       - ./sfjf:/code
       - ./sfjf/media:/code/media
+      - ./secret_key.txt:/code/secret_key.txt
     expose:
       - "80"
     environment:
       - "VIRTUAL_HOST=localhost"
+      - "DJANGO_PRODUCTION=1"
+      - "DJANGO_SECRET_KEY=/code/secret_key.txt"
     restart: on-failure
     command: bash -c "python3 manage.py makemigrations && python3 manage.py migrate && python3 manage.py runserver 0.0.0.0:80"
+
+
+  # Serve static files in production
+  fileserver:
+    image: halverneus/static-file-server:latest
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./sfjf/static:/web
+    environment:
+      - "PORT=8080"
+      - "VIRTUAL_HOST=fileserver"
+    restart: on-failure
