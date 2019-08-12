@@ -10,35 +10,55 @@ services:
     volumes:
       - /var/run/docker.sock:/tmp/docker.sock
       - ./nginx.conf:/etc/nginx/nginx.conf
+    restart: on-failure
 
 
   # Main Django website
   personalsite:
     build: .
     image: personalsite
-    container_name: personalsite
     volumes:
       - ./sfjf:/code
-      - ./sfjf/media:/code/media
-      - ./secret_key.txt:/code/secret_key.txt
+      - ./secret_key.txt:/code/secret_key.txt:ro
     expose:
       - "80"
     environment:
       - "VIRTUAL_HOST=localhost"
       - "DJANGO_PRODUCTION=1"
       - "DJANGO_SECRET_KEY=/code/secret_key.txt"
-    restart: on-failure
     command: bash -c "python3 manage.py makemigrations && python3 manage.py migrate && python3 manage.py runserver 0.0.0.0:80"
+    restart: on-failure
 
 
   # Serve static files in production
-  fileserver:
+  staticfileserver:
     image: halverneus/static-file-server:latest
     ports:
       - "8080:8080"
+    expose:
+      - "8080"
     volumes:
       - ./sfjf/static:/web
     environment:
       - "PORT=8080"
-      - "VIRTUAL_HOST=fileserver"
+      - "URL_PREFIX=/static"
+      - "SHOW_LISTING=false"
+      - "VIRTUALHOST=staticfileserver"
+    restart: on-failure
+
+
+  # Serve media files in production
+  mediafileserver:
+    image: halverneus/static-file-server:latest
+    ports:
+      - "8081:8081"
+    expose:
+      - "8081"
+    volumes:
+      - ./sfjf/media:/web
+    environment:
+      - "PORT=8081"
+      - "URL_PREFIX=/media"
+      - "SHOW_LISTING=false"
+      - "VIRTUALHOST=mediafileserver"
     restart: on-failure

@@ -27,7 +27,7 @@ if os.path.isfile(SECRET_KEY):
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DJANGO_PRODUCTION') is None
 
-ALLOWED_HOSTS = ['localhost']
+ALLOWED_HOSTS = ['localhost', 'personalsite']
 
 
 # Application definition
@@ -123,11 +123,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-STATIC_URL = 'http://' + ALLOWED_HOSTS[0] + ':8080/'
-
-# Crispy Forms bootstrap version
-CRISPY_TEMPLATE_PACK = 'bootstrap4'
+STATIC_URL = 'http://' + ALLOWED_HOSTS[0] + '/static/'
 
 # Media directory
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-MEDIA_URL = '/media/'
+MEDIA_URL = 'http://' + ALLOWED_HOSTS[0] + '/media/'
+
+# Crispy Forms bootstrap version
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
