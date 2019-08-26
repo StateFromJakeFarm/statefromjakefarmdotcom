@@ -52,7 +52,7 @@ services:
   mediafileserver:
     image: halverneus/static-file-server:latest
     ports:
-      - "8081:8080"
+      - "8081:8081"
     expose:
       - "8081"
     volumes:
