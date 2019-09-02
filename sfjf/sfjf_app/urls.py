@@ -14,5 +14,6 @@ urlpatterns = [
     path('blog/edit/<slug:slug>', views.edit_post, name='edit post'),
     path('blog/view/<slug:slug>', views.view_post, name='view post'),
     path('projects', views.projects, name='projects'),
+    path('contact', views.contact, name='contact'),
     url(r'^markdownx/', include(markdownx)),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

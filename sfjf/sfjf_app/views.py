@@ -22,6 +22,17 @@ def about(request):
     return render(request, 'about.html', context=context)
 
 
+def contact(request):
+    '''
+    Render contact info page
+    '''
+    context = {
+        'nbar': 'Contact',
+    }
+
+    return render(request, 'contact.html', context=context)
+
+
 @login_required
 @permission_required('user.is_staff', raise_exception=True)
 def edit_post(request, slug=''):
